@@ -1,13 +1,13 @@
 package main
 
 import (
-	"log"
+	"os"
 
 	"git.sr.ht/~fantomebeignet/ppu/cmd"
 )
 
 func main() {
 	if err := cmd.Execute(); err != nil {
-		log.Fatalf("error: %s\n", err.Error())
+		os.Exit(1)
 	}
 }

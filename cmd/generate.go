@@ -1,16 +1,13 @@
 package cmd
 
 import (
-	"crypto/rand"
-	"encoding/binary"
 	"fmt"
 	"strconv"
 	"strings"
 
-	wl "github.com/kklash/wordlist4096"
 	"github.com/spf13/cobra"
-	"golang.org/x/text/cases"
-	"golang.org/x/text/language"
+
+	"git.sr.ht/~fantomebeignet/ppu/internal/encoding"
 )
 
 var capitalize bool
@@ -27,19 +24,11 @@ var generateCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		buf := make([]byte, n*2)
-		if _, err := rand.Read(buf); err != nil {
+		encoded, err := encoding.NewRandom(uint(n))
+		if err != nil {
 			return err
 		}
-		words := make([]string, n)
-		for i := range n {
-			index := binary.BigEndian.Uint16(buf[2*i : 2*(i+1)])
-			if capitalize {
-				words[i] = cases.Title(language.English).String(wl.WordList[index%4096])
-			} else {
-				words[i] = wl.WordList[index%4096]
-			}
-		}
+		words := encoded.ToWords(capitalize)
 		fmt.Println(strings.Join(words, "-"))
 		return nil
 	},

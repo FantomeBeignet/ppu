@@ -63,8 +63,7 @@ var completeCmd = &cobra.Command{
 					}, &input).
 					Validate(validate),
 			),
-		).WithKeyMap(km).
-			WithAccessible(accessible)
+		).WithKeyMap(km).WithAccessible(accessible).WithTheme(huh.ThemeCatppuccin())
 		err := form.Run()
 		if err != nil {
 			log.Fatal(err)

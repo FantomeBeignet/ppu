@@ -47,5 +47,5 @@ var generateCmd = &cobra.Command{
 
 func init() {
 	generateCmd.Flags().
-		BoolVarP(&capitalize, "capitalize", "c", false, "Wether to capitalize each word")
+		BoolVarP(&capitalize, "capitalize", "c", false, "capitalize each word of the passphase")
 }

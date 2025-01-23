@@ -36,7 +36,8 @@ Aliases:
   generate, g, gen
 
 Flags:
-  -h, --help   help for generate
+  -c, --capitalize   capitalize each word of the passphase
+  -h, --help         help for generate
 ```
 
 Given an argument `x`, `ppu generate x` prints an x-word long passphrase to
@@ -55,7 +56,9 @@ Aliases:
   complete, c, comp
 
 Flags:
-  -h, --help   help for complete
+  -a, --accessible   use a more accessible rendering mode
+  -c, --copy         copy passphrase to clipboard instead of printing to stdout
+  -h, --help         help for complete
 ```
 
 `ppu complete` gives you a prompt to help type your passphrase in, providing

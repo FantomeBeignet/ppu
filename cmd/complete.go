@@ -82,7 +82,7 @@ var completeCmd = &cobra.Command{
 
 func init() {
 	completeCmd.Flags().
-		BoolVarP(&useClipboard, "copy", "c", false, "Copy passphrase to clipboard instead of printing to stdout")
+		BoolVarP(&useClipboard, "copy", "c", false, "copy passphrase to clipboard instead of printing to stdout")
 	completeCmd.Flags().
-		BoolVarP(&accessible, "accessible", "a", false, "Use a more accessible rendering mode")
+		BoolVarP(&accessible, "accessible", "a", false, "use a more accessible rendering mode")
 }

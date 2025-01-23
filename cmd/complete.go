@@ -15,7 +15,7 @@ import (
 
 func suggest(p string) []string {
 	words := strings.Split(strings.ToLower(p), "-")
-	lastWord := words[len(words)-1]
+	lastWord := strings.ToLower(words[len(words)-1])
 	res := []string{}
 	for _, suff := range wl.Search(lastWord).Suffixes {
 		res = append(res, p+suff)
@@ -26,7 +26,7 @@ func suggest(p string) []string {
 func validate(p string) error {
 	words := strings.Split(strings.ToLower(p), "-")
 	for _, w := range words {
-		if !slices.Contains(wl.WordList, w) {
+		if !slices.Contains(wl.WordList, strings.ToLower(w)) {
 			return errors.New("invalid passphrase")
 		}
 	}

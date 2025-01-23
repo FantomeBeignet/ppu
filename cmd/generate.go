@@ -9,7 +9,11 @@ import (
 
 	wl "github.com/kklash/wordlist4096"
 	"github.com/spf13/cobra"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
+
+var capitalize bool
 
 var generateCmd = &cobra.Command{
 	Use:     "generate <number of words>",
@@ -30,9 +34,18 @@ var generateCmd = &cobra.Command{
 		words := make([]string, n)
 		for i := range n {
 			index := binary.BigEndian.Uint16(buf[2*i : 2*(i+1)])
-			words[i] = wl.WordList[index%4096]
+			if capitalize {
+				words[i] = cases.Title(language.English).String(wl.WordList[index%4096])
+			} else {
+				words[i] = wl.WordList[index%4096]
+			}
 		}
 		fmt.Println(strings.Join(words, "-"))
 		return nil
 	},
+}
+
+func init() {
+	generateCmd.Flags().
+		BoolVarP(&capitalize, "capitalize", "c", false, "Wether to capitalize each word")
 }

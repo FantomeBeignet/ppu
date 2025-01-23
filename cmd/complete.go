@@ -7,6 +7,7 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/atotto/clipboard"
 	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/huh"
 	wl "github.com/kklash/wordlist4096"
@@ -33,11 +34,13 @@ func validate(p string) error {
 	return nil
 }
 
+var copy bool
+
 var completeCmd = &cobra.Command{
 	Use:     "complete",
 	Short:   "Input a passphrase, with autocomplete",
 	Aliases: []string{"c", "comp"},
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		km := huh.NewDefaultKeyMap()
 		km.Input.AcceptSuggestion = key.NewBinding(
 			key.WithKeys("tab"),
@@ -63,6 +66,18 @@ var completeCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(input)
+		if copy {
+			if err = clipboard.WriteAll(input); err != nil {
+				return err
+			}
+		} else {
+			fmt.Println(input)
+		}
+		return nil
 	},
+}
+
+func init() {
+	completeCmd.Flags().
+		BoolVarP(&copy, "copy", "c", false, "Copy passphrase to clipboard instead of printing to stdout")
 }

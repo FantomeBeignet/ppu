@@ -4,7 +4,7 @@ import "github.com/spf13/cobra"
 
 var rootCmd = &cobra.Command{
 	Use:   "ppu",
-	Short: "PassPhrase (Ultimate|Utils)",
+	Short: "PassPhrase (Utils|Ultimate)",
 	Long:  `Small tool generate and autocomplete passphrases`,
 }
 

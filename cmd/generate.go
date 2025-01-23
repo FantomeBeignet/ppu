@@ -12,8 +12,9 @@ import (
 )
 
 var generateCmd = &cobra.Command{
-	Use:   "generate",
-	Short: "Generate a passphrase",
+	Use:     "generate <number of words>",
+	Short:   "Generate a passphrase",
+	Aliases: []string{"g", "gen"},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if err := cobra.ExactArgs(1)(cmd, args); err != nil {
 			return err

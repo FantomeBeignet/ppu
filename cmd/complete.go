@@ -34,8 +34,9 @@ func validate(p string) error {
 }
 
 var completeCmd = &cobra.Command{
-	Use:   "complete",
-	Short: "Input a passphrase, with autocomplete",
+	Use:     "complete",
+	Short:   "Input a passphrase, with autocomplete",
+	Aliases: []string{"c", "comp"},
 	Run: func(cmd *cobra.Command, args []string) {
 		km := huh.NewDefaultKeyMap()
 		km.Input.AcceptSuggestion = key.NewBinding(

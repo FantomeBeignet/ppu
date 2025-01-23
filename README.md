@@ -16,6 +16,8 @@ Usage:
 
 Available Commands:
   complete    Input a passphrase, with autocomplete
+  decode      Decode a passphrase as a byte string
+  encode      Encode a byte string as a passphrase
   generate    Generate a passphrase
   help        Help about any command
 
@@ -66,6 +68,55 @@ Flags:
 `ppu complete` gives you a prompt to help type your passphrase in, providing
 autocompletion on each word of the passphrase. The resulting passphrase is then
 printed to `stdout`.
+
+### Encoding data as a passphrase
+
+```console
+user@host:~$ ppu help encode
+Encode a byte string as a passphrase
+
+Usage:
+  ppu encode [data] [flags]
+
+Aliases:
+  encode, e, enc
+
+Flags:
+  -a, --accessible   use a more accessible rendering mode
+  -C, --capitalize   copy passphrase to clipboard instead of printing to stdout
+  -c, --copy         copy passphrase to clipboard instead of printing to stdout
+  -h, --help         help for encode
+```
+
+`ppu encode` encodes data (represented in hex, octal, binary or decimal) as a
+passphrase. The data can either be passed directly through the command line,
+or through an password input prompt if no argument is passed.
+
+### Decoding a passphrase as data
+
+```console
+user@host:~$ ppu help decode
+Decode a passphrase as a byte string
+
+Usage:
+  ppu decode [passphrase] [flags]
+
+Aliases:
+  decode, d, dec
+
+Flags:
+  -a, --accessible   use a more accessible rendering mode
+      --bin          output result as binary
+  -c, --copy         copy passphrase to clipboard instead of printing to stdout
+      --dec          output result as decimal
+  -h, --help         help for decode
+      --hex          output result as hexadecimal (default true)
+      --oct          output result as octal
+```
+
+`ppu decode` decodes a passphrase, passed either through the command line or an
+autocompleting input prompt, as a byte string, either in hex, octal, binary or
+decimal format.
 
 ## Notes
 

@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/atotto/clipboard"
 	"github.com/spf13/cobra"
@@ -24,7 +23,7 @@ var completeCmd = &cobra.Command{
 		form := input.NewPassphraseInput(&inputVar, accessible)
 		err := form.Run()
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 		if useClipboard {
 			if err = clipboard.WriteAll(inputVar); err != nil {

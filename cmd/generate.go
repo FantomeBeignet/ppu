@@ -28,7 +28,7 @@ var generateCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		words := encoded.ToWords(capitalize)
+		words := encoded.Words(capitalize)
 		fmt.Println(strings.Join(words, "-"))
 		return nil
 	},

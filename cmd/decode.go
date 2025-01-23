@@ -45,15 +45,19 @@ func prefix() string {
 }
 
 var decodeCmd = &cobra.Command{
-	Use:     "decode",
+	Use:     "decode [passphrase]",
 	Short:   "Decode a passphrase as a byte string",
 	Aliases: []string{"d", "dec"},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var inputVar string
-		form := input.NewPassphraseInput(&inputVar, accessible)
-		err := form.Run()
-		if err != nil {
-			return err
+		if len(args) > 0 {
+			inputVar = args[0]
+		} else {
+			form := input.NewPassphraseInput(&inputVar, accessible)
+			err := form.Run()
+			if err != nil {
+				return err
+			}
 		}
 		encoded, err := encoding.FromWords(strings.Split(inputVar, "-"))
 		if err != nil {

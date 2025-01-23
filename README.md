@@ -3,6 +3,8 @@
 Generate memorable passphrases, and get help typing them in case they aren't so
 memorable to you.
 
+<img alt="ppu demo" width="800" src="./demo/ppu.gif">
+
 ## Usage
 
 ```console

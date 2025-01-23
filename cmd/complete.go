@@ -55,7 +55,6 @@ var completeCmd = &cobra.Command{
 					Value(&input).
 					Inline(true).
 					Title("Passphrase").
-					Placeholder("word").
 					SuggestionsFunc(func() []string {
 						return suggest(input)
 					}, &input).

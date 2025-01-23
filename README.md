@@ -1,6 +1,6 @@
 # ppu
 
-Generate memorable passphrase, and get help typing them in case they aren't so
+Generate memorable passphrases, and get help typing them in case they aren't so
 memorable to you.
 
 ## Usage

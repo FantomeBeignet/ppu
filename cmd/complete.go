@@ -34,7 +34,10 @@ func validate(p string) error {
 	return nil
 }
 
-var copy bool
+var (
+	useClipboard bool
+	accessible   bool
+)
 
 var completeCmd = &cobra.Command{
 	Use:     "complete",
@@ -60,12 +63,13 @@ var completeCmd = &cobra.Command{
 					}, &input).
 					Validate(validate),
 			),
-		).WithKeyMap(km)
+		).WithKeyMap(km).
+			WithAccessible(accessible)
 		err := form.Run()
 		if err != nil {
 			log.Fatal(err)
 		}
-		if copy {
+		if useClipboard {
 			if err = clipboard.WriteAll(input); err != nil {
 				return err
 			}
@@ -78,5 +82,7 @@ var completeCmd = &cobra.Command{
 
 func init() {
 	completeCmd.Flags().
-		BoolVarP(&copy, "copy", "c", false, "Copy passphrase to clipboard instead of printing to stdout")
+		BoolVarP(&useClipboard, "copy", "c", false, "Copy passphrase to clipboard instead of printing to stdout")
+	completeCmd.Flags().
+		BoolVarP(&accessible, "accessible", "a", false, "Use a more accessible rendering mode")
 }

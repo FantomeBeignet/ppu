@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs ? (
     let
       inherit (builtins) fetchTree fromJSON readFile;
@@ -12,11 +13,17 @@
   ),
   buildGoApplication ? pkgs.buildGoApplication,
 }:
-buildGoApplication {
+buildGoApplication rec {
   pname = "ppu";
   version = "0.1";
-  pwd = ../.;
-  src = ../.;
+  src = lib.cleanSource ../.;
   modules = ../gomod2nix.toml;
   go = pkgs.go_1_22;
+  CGO_ENABLED = 0;
+  ldflags = [
+    ''-X="git.sr.ht/~fantomebeignet/ppu.version=${version}"''
+    "-s"
+    "-w"
+    ''-extldflags "-static"''
+  ];
 }

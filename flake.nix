@@ -41,7 +41,7 @@
             gofumpt.enable = true;
           };
         };
-        packages.default = pkgs.callPackage ./nix/package.nix {
+        packages.default = pkgs.pkgsStatic.callPackage ./nix/package.nix {
           inherit (gomod2nix.legacyPackages.${pkgs.system}) buildGoApplication;
         };
         devShells.default = pkgs.mkShellNoCC {

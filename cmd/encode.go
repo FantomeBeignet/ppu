@@ -13,7 +13,7 @@ import (
 )
 
 var encodeCmd = &cobra.Command{
-	Use:     "encode",
+	Use:     "encode [data]",
 	Short:   "Encode a byte string as a passphrase",
 	Aliases: []string{"e", "enc"},
 	RunE: func(cmd *cobra.Command, args []string) error {

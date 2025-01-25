@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 	"github.com/charmbracelet/huh"
 	"github.com/spf13/cobra"
 
-	"git.sr.ht/~fantomebeignet/ppu/internal/encoding"
+	"git.sr.ht/~fantomebeignet/ppu/encoding"
 )
 
 var encodeCmd = &cobra.Command{

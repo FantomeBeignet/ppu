@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import "github.com/spf13/cobra"
 
@@ -14,8 +14,4 @@ func init() {
 	rootCmd.AddCommand(decodeCmd)
 	rootCmd.AddCommand(encodeCmd)
 	rootCmd.CompletionOptions.DisableDefaultCmd = true
-}
-
-func Execute() error {
-	return rootCmd.Execute()
 }

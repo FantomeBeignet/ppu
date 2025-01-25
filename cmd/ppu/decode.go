@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"fmt"
@@ -7,8 +7,8 @@ import (
 	"github.com/atotto/clipboard"
 	"github.com/spf13/cobra"
 
-	"git.sr.ht/~fantomebeignet/ppu/internal/encoding"
-	"git.sr.ht/~fantomebeignet/ppu/internal/input"
+	"git.sr.ht/~fantomebeignet/ppu"
+	"git.sr.ht/~fantomebeignet/ppu/encoding"
 )
 
 var (
@@ -53,7 +53,7 @@ var decodeCmd = &cobra.Command{
 		if len(args) > 0 {
 			inputVar = args[0]
 		} else {
-			form := input.NewPassphraseInput(&inputVar, accessible)
+			form := ppu.NewPassphraseInput(&inputVar, accessible)
 			err := form.Run()
 			if err != nil {
 				return err

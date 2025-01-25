@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"github.com/atotto/clipboard"
 	"github.com/spf13/cobra"
 
-	"git.sr.ht/~fantomebeignet/ppu/internal/input"
+	"git.sr.ht/~fantomebeignet/ppu"
 )
 
 var (
@@ -20,7 +20,7 @@ var completeCmd = &cobra.Command{
 	Aliases: []string{"c", "comp"},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var inputVar string
-		form := input.NewPassphraseInput(&inputVar, accessible)
+		form := ppu.NewPassphraseInput(&inputVar, accessible)
 		err := form.Run()
 		if err != nil {
 			return err

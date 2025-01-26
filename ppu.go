@@ -47,7 +47,7 @@ func NewPassphraseInputForm(inputVar *string, title string, accessible bool) *hu
 		key.WithKeys("tab"),
 		key.WithHelp("tab", "complete"),
 	)
-
+	km.Quit = key.NewBinding(key.WithKeys("esc"))
 	form := huh.NewForm(
 		huh.NewGroup(
 			NewPassphraseInput(inputVar, title, accessible),

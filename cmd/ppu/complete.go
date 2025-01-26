@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/atotto/clipboard"
+	"github.com/charmbracelet/huh"
 	"github.com/spf13/cobra"
 
 	"git.sr.ht/~fantomebeignet/ppu"
@@ -22,8 +23,10 @@ var completeCmd = &cobra.Command{
 		var inputVar string
 		form := ppu.NewPassphraseInputForm(&inputVar, "Passphrase", accessible)
 		err := form.Run()
-		if err != nil {
-			return err
+		if err == huh.ErrUserAborted {
+			return nil
+		} else if err != nil {
+			panic(err)
 		}
 		if useClipboard {
 			if err = clipboard.WriteAll(inputVar); err != nil {

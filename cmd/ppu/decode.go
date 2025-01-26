@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/atotto/clipboard"
+	"github.com/charmbracelet/huh"
 	"github.com/spf13/cobra"
 
 	"git.sr.ht/~fantomebeignet/ppu"
@@ -55,8 +56,10 @@ var decodeCmd = &cobra.Command{
 		} else {
 			form := ppu.NewPassphraseInputForm(&inputVar, "Passphrase", accessible)
 			err := form.Run()
-			if err != nil {
-				return err
+			if err == huh.ErrUserAborted {
+				return nil
+			} else if err != nil {
+				panic(err)
 			}
 		}
 		encoded, err := encoding.FromWords(strings.Split(inputVar, "-"))

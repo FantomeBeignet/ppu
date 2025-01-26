@@ -26,7 +26,7 @@ var encodeCmd = &cobra.Command{
 				key.WithKeys("tab"),
 				key.WithHelp("tab", "complete"),
 			)
-
+			km.Quit = key.NewBinding(key.WithKeys("esc"))
 			form := huh.NewForm(
 				huh.NewGroup(
 					huh.NewInput().
@@ -36,8 +36,10 @@ var encodeCmd = &cobra.Command{
 				),
 			).WithKeyMap(km).WithAccessible(accessible).WithTheme(huh.ThemeCatppuccin())
 			err := form.Run()
-			if err != nil {
-				return err
+			if err == huh.ErrUserAborted {
+				return nil
+			} else if err != nil {
+				panic(err)
 			}
 		}
 		encoded, err := encoding.FromString(inputVar)

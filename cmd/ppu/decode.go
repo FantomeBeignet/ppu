@@ -53,7 +53,7 @@ var decodeCmd = &cobra.Command{
 		if len(args) > 0 {
 			inputVar = args[0]
 		} else {
-			form := ppu.NewPassphraseInput(&inputVar, accessible)
+			form := ppu.NewPassphraseInputForm(&inputVar, "Passphrase", accessible)
 			err := form.Run()
 			if err != nil {
 				return err

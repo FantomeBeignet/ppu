@@ -20,7 +20,7 @@ var completeCmd = &cobra.Command{
 	Aliases: []string{"c", "comp"},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var inputVar string
-		form := ppu.NewPassphraseInput(&inputVar, accessible)
+		form := ppu.NewPassphraseInputForm(&inputVar, "Passphrase", accessible)
 		err := form.Run()
 		if err != nil {
 			return err

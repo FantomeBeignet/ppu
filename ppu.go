@@ -30,7 +30,18 @@ func validate(p string) error {
 	return nil
 }
 
-func NewPassphraseInput(inputVar *string, accessible bool) *huh.Form {
+func NewPassphraseInput(inputVar *string, title string, accessible bool) *huh.Input {
+	return huh.NewInput().
+		Value(inputVar).
+		Inline(true).
+		Title(title).
+		SuggestionsFunc(func() []string {
+			return suggest(*inputVar)
+		}, inputVar).
+		Validate(validate)
+}
+
+func NewPassphraseInputForm(inputVar *string, title string, accessible bool) *huh.Form {
 	km := huh.NewDefaultKeyMap()
 	km.Input.AcceptSuggestion = key.NewBinding(
 		key.WithKeys("tab"),
@@ -39,14 +50,7 @@ func NewPassphraseInput(inputVar *string, accessible bool) *huh.Form {
 
 	form := huh.NewForm(
 		huh.NewGroup(
-			huh.NewInput().
-				Value(inputVar).
-				Inline(true).
-				Title("Passphrase").
-				SuggestionsFunc(func() []string {
-					return suggest(*inputVar)
-				}, inputVar).
-				Validate(validate),
+			NewPassphraseInput(inputVar, title, accessible),
 		),
 	).WithKeyMap(km).WithAccessible(accessible).WithTheme(huh.ThemeCatppuccin())
 	return form

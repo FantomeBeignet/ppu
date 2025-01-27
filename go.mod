@@ -8,6 +8,7 @@ require (
 	github.com/charmbracelet/huh v0.6.0
 	github.com/kklash/wordlist4096 v1.0.0
 	github.com/spf13/cobra v1.8.1
+	golang.org/x/crypto v0.32.0
 	golang.org/x/text v0.21.0
 )
 

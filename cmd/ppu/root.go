@@ -13,5 +13,6 @@ func init() {
 	rootCmd.AddCommand(generateCmd)
 	rootCmd.AddCommand(decodeCmd)
 	rootCmd.AddCommand(encodeCmd)
+	rootCmd.AddCommand(fromCmd)
 	rootCmd.CompletionOptions.DisableDefaultCmd = true
 }

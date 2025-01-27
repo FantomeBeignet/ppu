@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/kklash/wordlist4096"
+	"golang.org/x/crypto/argon2"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 )
@@ -31,6 +32,13 @@ type EncodedPassphrase struct {
 func maxBigIntWithLen(bitLen uint) *big.Int {
 	maxPowTwo := new(big.Int).Lsh(one, bitLen)
 	return maxPowTwo.Sub(maxPowTwo, one)
+}
+
+func NewFromSeed(seed, salt []byte, numWords uint) *EncodedPassphrase {
+	bitLen := numWords * WORD_LEN_BIT
+	hashedSeed := argon2.IDKey(seed, nil, 1, 64*1024, 4, uint32(bitLen))
+	val := new(big.Int).SetBytes(hashedSeed)
+	return &EncodedPassphrase{val, numWords}
 }
 
 func NewRandom(numWords uint) (*EncodedPassphrase, error) {
